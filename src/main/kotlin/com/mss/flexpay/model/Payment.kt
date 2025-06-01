@@ -1,0 +1,12 @@
+package com.mss.flexpay.model
+
+import com.mss.flexpay.enums.PaymentStatus
+
+class Payment {
+
+    var id: String? = null
+    var amount: Double? = null
+    var status: PaymentStatus? = null
+    var payerId: String? = null
+    var createdAt: String? = null
+}
