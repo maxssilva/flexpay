@@ -2,27 +2,25 @@ package com.mss.flexpay.dtos
 
 import com.mss.flexpay.enums.PaymentStatus
 import com.mss.flexpay.model.Payment
-import org.hibernate.id.uuid.UuidGenerator
+import java.time.LocalDateTime
 import java.util.UUID
 
-class PaymentRequest {
-    private var id: String? = null
-    private var amount: Double? = null
-    private var status: PaymentStatus? = null
-    private var payerId: String? = null
-    private var createdAt: String? = null
-
-    private fun paymentRequestToBO(  id: String?,
-                                     amount: Double?,
-                                     status: PaymentStatus?,
-                                     payerId: String?,
-                                     createdAt: String?): Payment {
-        val payment = Payment()
-        payment.id = id?.takeIf { it.isNotBlank() } ?: UUID.randomUUID().toString().toString() else id)
-        payment.amount = amount
-        payment.status = status
-        payment.payerId = payerId
-        payment.createdAt = createdAt
-        return payment
+data class PaymentRequest(
+    val id: String? = null,
+    val amount: Double,
+    val payerId: String?
+) {
+    fun paymentRequestToBO(
+        id: String?,
+        amount: Double?,
+        payerId: String?,
+    ): Payment {
+        return Payment(
+            id ?: UUID.randomUUID().toString(),
+            amount,
+            PaymentStatus.PENDING,
+            payerId,
+            LocalDateTime.now().toString()
+        )
     }
 }

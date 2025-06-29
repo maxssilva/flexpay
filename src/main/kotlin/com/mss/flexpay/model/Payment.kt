@@ -2,8 +2,7 @@ package com.mss.flexpay.model
 
 import com.mss.flexpay.enums.PaymentStatus
 
-class Payment {
-
+class Payment(id: String, amount: Double?, status: PaymentStatus, payerId: String?, createdAt: String) {
     var id: String? = null
     var amount: Double? = null
     var status: PaymentStatus? = null
