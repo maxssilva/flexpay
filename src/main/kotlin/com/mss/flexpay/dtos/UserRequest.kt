@@ -1,27 +1,26 @@
 package com.mss.flexpay.dtos
 
+import com.mss.flexpay.enums.UserType
 import com.mss.flexpay.model.User
+import java.util.UUID
 
 class UserRequest(
-    val id: String? = null,
+    val id: String?,
     val name: String,
-    val userType: String,
-    val email: String,
-    val password: String
+    val userType: UserType,
+    val email: String
 ) {
     fun userRequestToBO(
-        id: String? = null,
+        id: String?,
         name: String,
-        userType: String,
-        email: String,
-        password: String
+        userType: UserType,
+        email: String
     ): User {
         return User(
-            id ?: this.id,
+            id = id?.takeIf { it.isNotBlank() } ?: UUID.randomUUID().toString(),
             name,
-            com.mss.flexpay.enums.UserType.valueOf(userType.uppercase()),
-            email,
-            password
+            userType,
+            email
         )
     }
 }
