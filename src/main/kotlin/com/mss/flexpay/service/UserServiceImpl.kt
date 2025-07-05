@@ -5,8 +5,9 @@ import com.mss.flexpay.repository.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
-class UserServiceImpl : UserService {
-    lateinit var userRepository: UserRepository
+class UserServiceImpl(
+    private val userRepository: UserRepository
+) : UserService {
     override fun createUser(user: User): User {
         return userRepository.save(user)
     }

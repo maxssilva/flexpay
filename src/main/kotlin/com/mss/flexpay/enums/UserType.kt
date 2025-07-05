@@ -1,11 +1,20 @@
 package com.mss.flexpay.enums
 
-enum class UserType(string: String) {
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonValue
+
+enum class UserType(private val value: String) {
     ADMIN("admin"),
     SELLER("seller"),
     PAYER("payer");
 
-    override fun toString(): String {
-        return name
-    }
-}
+    @JsonValue
+    fun getValue(): String = value
+
+    companion object {
+        @JvmStatic
+        @JsonCreator
+        fun fromValue(value: String): UserType =
+            values().find { it.value.equals(value, ignoreCase = true) }
+                ?: throw IllegalArgumentException("Invalid user type: $value")
+    }}
