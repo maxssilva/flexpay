@@ -11,7 +11,7 @@ fun UserRequest.toBO(
     email: String? = null
 ): User {
     return User(
-        id = id ?: this.id,
+        id = id ,
         name = name ?: this.name,
         userType = userType,
         email = email ?: this.email

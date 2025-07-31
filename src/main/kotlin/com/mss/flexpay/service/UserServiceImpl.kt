@@ -2,12 +2,15 @@ package com.mss.flexpay.service
 
 import com.mss.flexpay.model.User
 import com.mss.flexpay.repository.UserRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class UserServiceImpl(
-    private val userRepository: UserRepository
-) : UserService {
+class UserServiceImpl : UserService {
+
+    @Autowired
+    lateinit var userRepository: UserRepository
+
     override fun createUser(user: User): User {
         return userRepository.save(user)
     }
