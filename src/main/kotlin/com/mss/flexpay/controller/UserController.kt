@@ -29,7 +29,6 @@ class UserController(
             userType = userRequest.userType,
             email = userRequest.email
         )
-        userService.createUser(user)
-        return user
+     return userService.createUser(user)
     }
 }
