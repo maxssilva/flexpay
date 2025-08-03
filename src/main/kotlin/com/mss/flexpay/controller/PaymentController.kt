@@ -3,10 +3,11 @@ package com.mss.flexpay.controller
 import com.mss.flexpay.dtos.PaymentRequest
 import com.mss.flexpay.model.Payment
 import com.mss.flexpay.service.PaymentService
-import org.springframework.http.HttpStatus
+
+import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.HttpStatus
 
 @RestController
 class PaymentController{
@@ -23,7 +24,7 @@ lateinit var paymentService: PaymentService
             payerId = paymentRequest.payerId
         )
   /*implementação pausada para criação da entiddade Payer*/
-        return  payment /*paymentService.createPayment(payment)*/
+        return  paymentService.createPayment(payment)
 
     }
 }
