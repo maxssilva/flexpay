@@ -17,8 +17,7 @@ class UserController(
     private val userService: UserServiceImpl
 ) {
 
-    @PostMapping
-    @RequestMapping("/create")
+    @PostMapping(("/create"))
     @ResponseStatus(HttpStatus.CREATED)
     fun createUser(
         @RequestBody
