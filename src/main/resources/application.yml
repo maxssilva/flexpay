@@ -13,6 +13,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/flexpay
+    username: postgres
+    password: postgres
   flyway:
     enabled: true
     baseline-on-migrate: true

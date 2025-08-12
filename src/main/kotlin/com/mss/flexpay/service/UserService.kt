@@ -6,6 +6,6 @@ interface UserService{
     fun createUser(user: User): User
     fun getUserById(id: String): User?
     fun getAllUsers(): List<User>
-    fun updateUser(id: String, name: String, userType: String, email: String): User
+    suspend  fun updateUser(user: User): User
     fun deleteUser(id: String)
 }

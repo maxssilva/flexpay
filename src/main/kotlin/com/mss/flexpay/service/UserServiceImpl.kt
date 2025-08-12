@@ -2,14 +2,12 @@ package com.mss.flexpay.service
 
 import com.mss.flexpay.model.User
 import com.mss.flexpay.repository.UserRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class UserServiceImpl : UserService {
-
-    @Autowired
-    lateinit var userRepository: UserRepository
+class UserServiceImpl(
+    private val userRepository: UserRepository
+) : UserService {
 
     override fun createUser(user: User): User {
         return userRepository.save(user)
@@ -25,9 +23,10 @@ class UserServiceImpl : UserService {
         TODO("Not yet implemented")
     }
 
-    override fun updateUser(id: String, name: String, userType: String, email: String): User {
-        // Implementation for updating a user
-        TODO("Not yet implemented")
+    override suspend fun updateUser(user: User): User {
+        return userRepository.save(
+            user
+        )
     }
 
     override fun deleteUser(id: String) {
