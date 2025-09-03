@@ -3,7 +3,8 @@ package com.mss.flexpay.controller
 import com.mss.flexpay.converter.toNewUser
 import com.mss.flexpay.converter.toUpdateUser
 import com.mss.flexpay.dtos.UserRequest
-import com.mss.flexpay.model.User
+import com.mss.flexpay.dtos.UserResponse
+import com.mss.flexpay.dtos.toResponse
 import com.mss.flexpay.service.UserServiceImpl
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -24,19 +25,19 @@ class UserController(
 
     @PostMapping(("/create"))
     @ResponseStatus(HttpStatus.CREATED)
-    fun createUser(
+    suspend fun createUser(
         @RequestBody
         userRequest: UserRequest
-    ): User {
+    ): UserResponse {
         val user = userRequest.toNewUser(
             name = userRequest.name,
             userType = userRequest.userType,
             email = userRequest.email
         )
-     return userService.createUser(user)
+     return userService.createUser(user).toResponse()
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{uuid}")
     @ResponseStatus(HttpStatus.OK)
     suspend fun updateUser(
         @PathVariable("uuid")
