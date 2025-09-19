@@ -4,9 +4,9 @@ import com.mss.flexpay.model.User
 import java.util.UUID
 
 interface UserService {
-    fun createUser(user: User): User
+    suspend fun createUser(user: User): User
     suspend fun findById(id: UUID): User?
-    fun getAllUsers(): List<User>
+    suspend fun getAllUsers(): List<User>
     suspend fun updateUser(user: User): User
-    fun deleteUser(id: String)
+    suspend fun deleteUser(id: UUID)
 }

@@ -10,28 +10,27 @@ class UserServiceImpl(
     private val userRepository: UserRepository
 ) : UserService {
 
-    override fun createUser(user: User): User {
+    override suspend fun createUser(user: User): User {
         return userRepository.save(user)
     }
 
     override suspend fun findById(id: UUID): User? {
-        return userRepository.findById(id).orElseThrow { IllegalArgumentException("Usuario nao encontrado com o id: ${id}") }
+        return userRepository.findById(id)
+            ?: throw IllegalArgumentException("Usuario nao encontrado com o id: $id")
     }
 
-        override fun getAllUsers(): List<User> {
-            // Implementation for retrieving all users
-            TODO("Not yet implemented")
-        }
-
-        override suspend fun updateUser(user: User): User {
-            userRepository.findById(user.id).orElseThrow { IllegalArgumentException("Usuário não encontrado para o id: ${user.id}") }
-            return userRepository.save(
-                user
-            )
-        }
-
-        override fun deleteUser(id: String) {
-            // Implementation for deleting a user
-            TODO("Not yet implemented")
-        }
+    override suspend fun getAllUsers(): List<User> {
+        return userRepository.findAll()
     }
+
+    override suspend fun updateUser(user: User): User {
+       userRepository.findById(user.id)?: throw IllegalArgumentException("Usuario nao encontrado com o id: ${user.id}")
+         return userRepository.updateUser(user)
+    }
+
+    override suspend fun deleteUser(id: UUID) {
+    userRepository.findById(id)?: throw IllegalArgumentException("Usuario nao encontrado com o id: $id")
+        return userRepository.deleteById(id)
+    }
+}
+

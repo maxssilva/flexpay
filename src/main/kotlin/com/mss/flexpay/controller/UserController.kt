@@ -34,7 +34,7 @@ class UserController(
             userType = userRequest.userType,
             email = userRequest.email
         )
-     return userService.createUser(user).toResponse()
+        return userService.createUser(user).toResponse()
     }
 
     @PutMapping("/update/{uuid}")
@@ -45,14 +45,12 @@ class UserController(
         uuid: String,
         @RequestBody
         userRequest: UserRequest
-    ){
+    ): UserResponse {
         val uuidFormated = toUUIDOrNull(uuid) ?: throw IllegalArgumentException("Invalid UUID format")
         val user = userRequest.toUpdateUser(
             id = uuidFormated
         )
-        userService.updateUser(
-         user
-        )
+        return userService.updateUser(user).toResponse()
     }
 }
 
