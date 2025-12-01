@@ -8,6 +8,7 @@ import com.mss.flexpay.dtos.toResponse
 import com.mss.flexpay.service.UserServiceImpl
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
@@ -28,13 +29,9 @@ class UserController(
     suspend fun createUser(
         @RequestBody
         userRequest: UserRequest
-    ): UserResponse {
-        val user = userRequest.toNewUser(
-            name = userRequest.name,
-            userType = userRequest.userType,
-            email = userRequest.email
-        )
-        return userService.createUser(user).toResponse()
+    ): ResponseEntity<UserResponse> {
+        val response = userService.createUser(userRequest)
+        return ResponseEntity.status(HttpStatus.CREATED).body(response)
     }
 
     @PutMapping("/update/{uuid}")

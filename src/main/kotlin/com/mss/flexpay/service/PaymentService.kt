@@ -1,10 +1,11 @@
 package com.mss.flexpay.service
 
+import com.mss.flexpay.dtos.PaymentRequest
 import com.mss.flexpay.model.Payment
 
 interface PaymentService {
     fun createPayment(
-        payment: Payment
+       paymentRequest: PaymentRequest
     ): Payment
 
     fun getPaymentById(id: String): Payment?

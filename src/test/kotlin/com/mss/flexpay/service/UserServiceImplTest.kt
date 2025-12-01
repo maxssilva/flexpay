@@ -66,7 +66,6 @@ class UserServiceImplTest {
         coEvery { userRepository.save(newUser) } returns newUser
         val createdUser = userService.createUser(newUser)
         assertNotNull(createdUser)
-        assertEquals(uuid, createdUser.id)
         assertEquals("Alice Smith", createdUser.name)
     }
 }

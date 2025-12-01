@@ -15,7 +15,7 @@ import java.util.UUID
 class User(
     @Id
     @Column(columnDefinition = "uuid", nullable = false, updatable = false)
-    val id: UUID,
+    val id: UUID?,
     val name: String,
     @Enumerated(EnumType.STRING)
     val userType: UserType,
