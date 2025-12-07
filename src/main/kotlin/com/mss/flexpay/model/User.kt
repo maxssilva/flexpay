@@ -14,10 +14,11 @@ import java.util.UUID
 @Table(name = "users")
 class User(
     @Id
-    @Column(columnDefinition = "uuid")
-    val id: UUID,
+    @Column(columnDefinition = "uuid", nullable = false, updatable = false)
+    val id: UUID?,
     val name: String,
     @Enumerated(EnumType.STRING)
     val userType: UserType,
+    @Column(unique = true)
     val email: String
 )

@@ -31,3 +31,8 @@ Execute o comando abaixo na raiz do projeto:
 
 ```bash
 docker-compose up -d
+
+
+## Para executar os testes, use:
+```bash
+./gradlew test

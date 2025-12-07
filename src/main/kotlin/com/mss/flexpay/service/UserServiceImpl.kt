@@ -1,5 +1,7 @@
 package com.mss.flexpay.service
 
+import com.mss.flexpay.dtos.UserResponse
+import com.mss.flexpay.dtos.toResponse
 import com.mss.flexpay.model.User
 import com.mss.flexpay.repository.UserRepository
 import org.springframework.stereotype.Service
@@ -10,8 +12,8 @@ class UserServiceImpl(
     private val userRepository: UserRepository
 ) : UserService {
 
-    override suspend fun createUser(user: User): User {
-        return userRepository.save(user)
+    override suspend fun createUser(userRequest: User): UserResponse {
+        return userRepository.save(userRequest).toResponse()
     }
 
     override suspend fun findById(id: UUID): User? {
